@@ -83,11 +83,11 @@ env = platform.node().upper()[:3]
 
 if "DST" in env:
     # 
-    DB_USER   = "ticket"
+    DB_USER = "ticket"
     DB_PASSWD = "1qaz@WSX"
 else:
     # 
-    DB_USER   = "root"
+    DB_USER = "root"
     DB_PASSWD = "Mysqlr00t"
 
 

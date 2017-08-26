@@ -1,6 +1,8 @@
 {% extends "base.html" %}
       {% block css %}
 <link rel="stylesheet" href="/static/bower_components/jquery.steps/demo/css/jquery.steps.css">
+<link rel="stylesheet" href="/static/bower_components/datetimepicker/build/jquery.datetimepicker.min.css">
+          <link rel="stylesheet" href="/static/bower_components/select2/dist/css/select2.min.css">
 {% endblock %}
 {% block content %}
        <nav aria-label="You are here:" role="navigation">
@@ -14,41 +16,121 @@
   </ul>
 </nav>
        <div id="wizard">
-        <h3>Keyboard</h3>
+        <h3>第一步</h3>
         <section>
-          <form>
           <div class="row">
             <div class="medium-6 columns">
-              <label>Input Label
-                <input type="text" placeholder=".medium-6.columns">
+              <label>项目名称
+                <input type="text" placeholder="项目名称">
               </label>
+            </div>
+              <div class="medium-6 columns">
+                                <label for="">选择销售
+                <select name="" id="" class="select-sales">
+                    <option value="">mmm</option>
+                </select>
+              </label>
+              </div>
+                            <div class="medium-6 columns">
+
+              <label for="">选择客户
+                <select name="" id="" class="select-customers">
+                    <option value=""></option>
+                </select>
+              </label>
+                                              </div>
+                            <div class="medium-6 columns">
+
+              <label for="">选择主导产品
+                  <select name="" id="" class="select-products">
+                      <option value=""></option>
+                  </select>
+              </label>
+               </div>
+                            <div class="medium-6 columns">
+
+              <label for="">
+                  选择服务区域
+                  <select name="" id="" class="select-areas">
+                      <option value=""></option>
+                  </select>
+              </label>
+               </div>
+
+          </div>
+        </section>
+        <h3>第二步</h3>
+        <section>
+            <div class="row">
+                <div class="" id="select_class">
+                    <label for="">选择分类I
+                        <select name="" id="" class="class1">
+                            <option value=""></option>
+                        </select>
+                    </label>
+                    <label for="">选择分类II
+                        <select name="" id="" class="class2">
+                            <option value=""></option>
+                        </select>
+                    </label>
+                    <label for="">选择分类III
+                        <select name="" id="" class="class3">
+                            <option value=""></option>
+                        </select>
+                    </label>
+                    <label for="">选择分类IV
+                        <select name="" id="" class="class4">
+                            <option value=""></option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </section>
+        <h3>第三步</h3>
+        <section>
+            <div class="row">
+                <div class="medium-6 columns">
+                    <label for="">选择工程师
+              <select>
+                  <option value=""></option>
+              </select></label>
             </div>
             <div class="medium-6 columns">
-              <label>Input Label
-                <input type="text" placeholder=".medium-6.columns">
-              </label>
+              <label>项目名称
+                <input type="text" placeholder="选择日期" id="datetimepicker">
+              </label>            </div>
             </div>
-          </div>
-        </form>
-        </section>
-        <h3>Effects</h3>
-        <section>
-            <p>Wonderful transition effects.</p>
-        </section>
-        <h3>Pager</h3>
-        <section>
-            <p>The next and previous buttons help you to navigate through your content.</p>
         </section>
     </div>
 {% endblock %}
 {% block js %}
     <script src="/static/bower_components/jquery.steps/build/jquery.steps.min.js"></script>
+    <script src="/static/bower_components/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+    <script src="/static/bower_components/select2/dist/js/select2.min.js"></script>
+    <script src="/static/bower_components/jquery.cxselect/jquery.cxselect.min.js"></script>
+    <script src="/static/bower_components/art-template/lib/template-web.js"></script>
     <script>
         $("#wizard").steps({
             headerTag: "h3",
             bodyTag: "section",
             transitionEffect: "slideLeft",
-            autoFocus: true
+            autoFocus: true,
+                onFinished: function (event, currentIndex) { alert('324')}
+        });
+
+        $('#datetimepicker').datetimepicker();
+
+        $(".select-sales").select2();
+        $(".select-customers").select2();
+        $(".select-products").select2();
+        $(".select-areas").select2();
+
+        //级联
+
+        $('#select_class').cxSelect({
+          url: 'cityData.min.json',               // 如果服务器不支持 .json 类型文件，请将文件改为 .js 文件
+          selects: ['class1', 'class2', 'class3', 'class4'],  // 数组，请注意顺序
+          emptyStyle: 'none'
         });
     </script>
 {% endblock%}
