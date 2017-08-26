@@ -88,7 +88,7 @@ if "DST" in env:
 else:
     # 
     DB_USER   = "root"
-    DB_PASSWD = "1qaz@WSX"
+    DB_PASSWD = "Mysqlr00t"
 
 
 DATABASES = {
