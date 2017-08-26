@@ -72,6 +72,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ticket.wsgi.application'
 
 
+import platform
+env = platform.node().upper()[:3]
+
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -79,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ticket',
-        'USER': 'root',
-        "PASSWORD": "Mysqlr00t",
+        'USER': 'ticket',
+        "PASSWORD": "1qaz@WSX",
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
