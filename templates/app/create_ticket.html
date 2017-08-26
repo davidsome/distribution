@@ -3,16 +3,13 @@
 <link rel="stylesheet" href="/static/bower_components/jquery.steps/demo/css/jquery.steps.css">
 <link rel="stylesheet" href="/static/bower_components/datetimepicker/build/jquery.datetimepicker.min.css">
           <link rel="stylesheet" href="/static/bower_components/select2/dist/css/select2.min.css">
+          <link rel="stylesheet" href="/static/bower_components/toastr/toastr.min.css">
 {% endblock %}
 {% block content %}
        <nav aria-label="You are here:" role="navigation">
   <ul class="breadcrumbs">
     <li><a href="#">首页</a></li>
     <li><a href="#">新增工单</a></li>
-    <li class="disabled">Gene Splicing</li>
-    <li>
-      <span class="show-for-sr">Current: </span> Cloning
-    </li>
   </ul>
 </nav>
        <div id="wizard">
@@ -38,6 +35,7 @@
                     <option value=""></option>
                 </select>
               </label>
+                                <div id="select-customers-content"></div>
                                               </div>
                             <div class="medium-6 columns">
 
@@ -108,14 +106,34 @@
     <script src="/static/bower_components/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
     <script src="/static/bower_components/select2/dist/js/select2.min.js"></script>
     <script src="/static/bower_components/jquery.cxselect/jquery.cxselect.min.js"></script>
+    <script src="/static/bower_components/toastr/toastr.min.js"></script>
     <script src="/static/bower_components/art-template/lib/template-web.js"></script>
+    <script id="select-customers" type="text/html">
+      <label for="">选择客户
+        <select name="" id="" class="select-customers">
+            <% for (var i = 0; i < list.length; i ++) { %>
+                <option value=""><%= i + 1 %> ：<%= list[i] %></option>
+            <% } %>
+            data: <%=$data%>
+        </select>
+      </label>
+    </script>
+    <script id="select-sales" type="text/html"></script>
+    <script id="select-products" type="text/html"></script>
+    <script id="select-areas" type="text/html"></script>
     <script>
+        var data = {
+            list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+        };
+        var html = template('select-customers', data);
+        document.getElementById('select-customers-content').innerHTML = html;
+
         $("#wizard").steps({
             headerTag: "h3",
             bodyTag: "section",
             transitionEffect: "slideLeft",
             autoFocus: true,
-                onFinished: function (event, currentIndex) { alert('324')}
+            onFinished: function (event, currentIndex) { toastr.success('已完成')}
         });
 
         $('#datetimepicker').datetimepicker();
@@ -126,7 +144,6 @@
         $(".select-areas").select2();
 
         //级联
-
         $('#select_class').cxSelect({
           url: 'cityData.min.json',               // 如果服务器不支持 .json 类型文件，请将文件改为 .js 文件
           selects: ['class1', 'class2', 'class3', 'class4'],  // 数组，请注意顺序
