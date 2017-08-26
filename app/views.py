@@ -9,5 +9,4 @@ def index(request):
 
 
 def create_ticket(request):
-    print 1
     return render_to_response("app/create_ticket.html")
