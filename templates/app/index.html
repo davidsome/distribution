@@ -1,135 +1,73 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>工单系统</title>
-    <link rel="stylesheet" href="/static/css/app.css">
-  </head>
-  <body>
-    <div class="grid-container">
-        <div class="top-bar">
-          <div class="top-bar-left">
-            <ul class="dropdown menu" data-dropdown-menu>
-              <li class="menu-text">工单系统</li>
-              <!--<li>-->
-                <!--<a href="#">One</a>-->
-                <!--<ul class="menu vertical">-->
-                  <!--<li><a href="#">One</a></li>-->
-                  <!--<li><a href="#">Two</a></li>-->
-                  <!--<li><a href="#">Three</a></li>-->
-                <!--</ul>-->
-              <!--</li>-->
-              <li><a href="#">首页</a></li>
-              <li><a href="#">工单列表</a></li>
-              <li><a href="#">后台管理</a></li>
-            </ul>
-          </div>
-          <div class="top-bar-right">
-            <ul class="menu">
-              <li><input type="search" placeholder="搜索"></li>
-              <li><button type="button" class="button">搜索</button></li>
-                <li><a href="">退出</a></li>
-            </ul>
-          </div>
-        </div>
-                          <p></p>
-        <p></p>
-        <div class="grid-x">
-            <div class="cell small-1">
-                <ul class="vertical menu">
-  <li><a href="#" class="button">新增工单</a></li>
-  <li><a href="#"></a></li>
-  <li><a href="#">待归类</a></li>
-  <li><a href="#">待归类</a></li>
+{% extends "base.html"%}
+{% block content %}
+  <nav aria-label="You are here:" role="navigation">
+<ul class="breadcrumbs">
+<li><a href="#">首页</a></li>
+<li><a href="#">工单列表页</a></li>
+<li class="disabled">Gene Splicing</li>
+<li>
+<span class="show-for-sr">Current: </span> Cloning
+</li>
 </ul>
-            </div>
-            <div class="cell small-1">
-                <p></p>
-            </div>
-              <div class="cell medium-6 large-10">
-                  <nav aria-label="You are here:" role="navigation">
-  <ul class="breadcrumbs">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">工单列表页</a></li>
-    <li class="disabled">Gene Splicing</li>
-    <li>
-      <span class="show-for-sr">Current: </span> Cloning
-    </li>
-  </ul>
 </nav>
-                  <table>
-                      <thead>
-                        <tr>
-                          <th width="200">工单号</th>
-                            <th>工单主题</th>
-                          <th>受理人</th>
-                          <th width="150">工单状态</th>
-                          <th width="150">分派日期</th>
-                            <th>操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>TAS123123</td>
-                            <td>外卖</td>
-                          <td>徐姓龙</td>
-                          <td>已分派</td>
-                          <td>2017-08-18 00:00:11</td>
-                            <td>
-                                <a href="" class="alert button">删除</a>
-                                <a href="" class="success button">详情</a>
-                            </td>
-                        </tr>
-                        <tr>
-                          <td>TAS123423123</td>
-                                                        <td>外卖</td>
+  <table>
+      <thead>
+        <tr>
+          <th width="200">工单号</th>
+            <th>工单主题</th>
+          <th>受理人</th>
+          <th width="150">工单状态</th>
+          <th width="150">分派日期</th>
+            <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TAS123123</td>
+            <td>外卖</td>
+          <td>徐姓龙</td>
+          <td>已分派</td>
+          <td>2017-08-18 00:00:11</td>
+            <td>
+                <a href="" class="alert button">删除</a>
+                <a href="" class="success button">详情</a>
+            </td>
+        </tr>
+        <tr>
+          <td>TAS123423123</td>
+                                        <td>外卖</td>
 
-                          <td>徐姓龙</td>
-                          <td>已分派</td>
-                          <td>2017-08-18 00:00:11</td>
-                        <td><a href="" class="alert button">删除</a>
-                                                        <a href="" class="success button">详情</a>
+          <td>徐姓龙</td>
+          <td>已分派</td>
+          <td>2017-08-18 00:00:11</td>
+        <td><a href="" class="alert button">删除</a>
+                                        <a href="" class="success button">详情</a>
 
-                        </td>
+        </td>
 
-                        </tr>
-                        <tr>
-                          <td>TAS12343123</td>
-                                                        <td>外卖</td>
-                          <td>老毛</td>
-                          <td>已分派</td>
-                          <td>2017-08-18 00:00:11</td>
-                        <td><a href="" class="alert button">删除</a>
-                                                        <a href="" class="success button">详情</a>
-                        </td>
+        </tr>
+        <tr>
+          <td>TAS12343123</td>
+                                        <td>外卖</td>
+          <td>老毛</td>
+          <td>已分派</td>
+          <td>2017-08-18 00:00:11</td>
+        <td><a href="" class="alert button">删除</a>
+                                        <a href="" class="success button">详情</a>
+        </td>
 
-                        </tr>
-                      </tbody>
-                    </table>
-                  <ul class="pagination text-center" role="navigation" aria-label="Pagination">
-  <li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
-  <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
-  <li><a href="#" aria-label="Page 2">2</a></li>
-  <li><a href="#" aria-label="Page 3">3</a></li>
-  <li><a href="#" aria-label="Page 4">4</a></li>
-  <li class="ellipsis" aria-hidden="true"></li>
-  <li><a href="#" aria-label="Page 12">12</a></li>
-  <li><a href="#" aria-label="Page 13">13</a></li>
-  <li class="pagination-next"><a href="#" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        </tr>
+      </tbody>
+    </table>
+  <ul class="pagination text-center" role="navigation" aria-label="Pagination">
+<li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
+<li class="current"><span class="show-for-sr">You're on page</span> 1</li>
+<li><a href="#" aria-label="Page 2">2</a></li>
+<li><a href="#" aria-label="Page 3">3</a></li>
+<li><a href="#" aria-label="Page 4">4</a></li>
+<li class="ellipsis" aria-hidden="true"></li>
+<li><a href="#" aria-label="Page 12">12</a></li>
+<li><a href="#" aria-label="Page 13">13</a></li>
+<li class="pagination-next"><a href="#" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
 </ul>
-              </div>
-</div>
-        <p></p>
-        <div class="footer">
-            <p style="text-align: center">版权© 2017️</p>
-        </div>
-    </div>
-
-    <script src="/static/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/static/bower_components/what-input/dist/what-input.js"></script>
-    <script src="/static/bower_components/foundation-sites/dist/js/foundation.js"></script>
-    <script src="/static/js/app.js"></script>
-  </body>
-</html>
+{% endblock %}

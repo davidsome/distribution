@@ -1,10 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工单系统</title>
+    <link rel="stylesheet" href="/static/css/app.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+                  {% block css %}{% endblock %}
+  </head>
+  <body>
+    <div class="grid-container">
+        <div class="top-bar">
+          <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+              <li class="menu-text">工单系统</li>
+              <!--<li>-->
+                <!--<a href="#">One</a>-->
+                <!--<ul class="menu vertical">-->
+                  <!--<li><a href="#">One</a></li>-->
+                  <!--<li><a href="#">Two</a></li>-->
+                  <!--<li><a href="#">Three</a></li>-->
+                <!--</ul>-->
+              <!--</li>-->
+              <li><a href="/">首页</a></li>
+              <li><a href="/">工单列表</a></li>
+              <li><a href="/admin/">后台管理</a></li>
+            </ul>
+          </div>
+          <div class="top-bar-right">
+            <ul class="menu">
+              <li><input type="search" placeholder="搜索"></li>
+              <li><button type="button" class="button">搜索</button></li>
+              <li><a href="/logout">退出</a></li>
+            </ul>
+          </div>
+        </div>
+        <p></p>
+        <div class="grid-x">
+            <div class="cell small-1">
+                <ul class="vertical menu">
+              <li><a href="/createTicket/" class="button">新增工单</a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#">待归类</a></li>
+              <li><a href="#">待归类</a></li>
+            </ul>
+            </div>
+            <div class="cell small-1">
+                <p></p>
+            </div>
+              <div class="cell medium-6 large-10">
+                {% block content %}{% endblock %}
+                </div>
+        </div>
+        <p></p>
+        <div class="footer">
+            <p style="text-align: center">版权© 2017️</p>
+        </div>
+    </div>
 
-</body>
+    <script src="/static/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/static/bower_components/what-input/dist/what-input.js"></script>
+    <script src="/static/bower_components/foundation-sites/dist/js/foundation.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/common.js"></script>
+              {% block js %}{% endblock %}
+
+  </body>
 </html>

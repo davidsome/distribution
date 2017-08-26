@@ -1,0 +1,15 @@
+{
+  "name": "art-template",
+  "homepage": "https://github.com/aui/artTemplate",
+  "version": "4.12.1",
+  "_release": "4.12.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.12.1",
+    "commit": "de0f67da3705cc5619ee471f089f717036fe17d6"
+  },
+  "_source": "https://github.com/aui/artTemplate.git",
+  "_target": "^4.12.1",
+  "_originalSource": "art-template",
+  "_direct": true
+}

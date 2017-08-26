@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+      {% block css %}
+<link rel="stylesheet" href="/static/bower_components/jquery.steps/demo/css/jquery.steps.css">
+{% endblock %}
+{% block content %}
+                  <nav aria-label="You are here:" role="navigation">
+  <ul class="breadcrumbs">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">新增工单</a></li>
+    <li class="disabled">Gene Splicing</li>
+    <li>
+      <span class="show-for-sr">Current: </span> Cloning
+    </li>
+  </ul>
+</nav>
+                    <div id="wizard">
+        <h3>Keyboard</h3>
+        <section>
+          <form>
+          <div class="row">
+            <div class="medium-6 columns">
+              <label>Input Label
+                <input type="text" placeholder=".medium-6.columns">
+              </label>
+            </div>
+            <div class="medium-6 columns">
+              <label>Input Label
+                <input type="text" placeholder=".medium-6.columns">
+              </label>
+            </div>
+          </div>
+        </form>
+        </section>
+        <h3>Effects</h3>
+        <section>
+            <p>Wonderful transition effects.</p>
+        </section>
+        <h3>Pager</h3>
+        <section>
+            <p>The next and previous buttons help you to navigate through your content.</p>
+        </section>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="/static/bower_components/jquery.steps/build/jquery.steps.min.js"></script>
+    <script>
+        $("#wizard").steps({
+            headerTag: "h3",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            autoFocus: true
+        });
+    </script>
+{% endblock%}
