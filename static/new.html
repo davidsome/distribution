@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工单系统</title>
+    <link rel="stylesheet" href="css/app.css">
+      <link rel="stylesheet" href="bower_components/jquery.steps/demo/css/jquery.steps.css">
+      <link rel="stylesheet" href="css/common.css">
+
+  </head>
+  <body>
+    <div class="grid-container">
+        <div class="top-bar">
+          <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+              <li class="menu-text">工单系统</li>
+              <!--<li>-->
+                <!--<a href="#">One</a>-->
+                <!--<ul class="menu vertical">-->
+                  <!--<li><a href="#">One</a></li>-->
+                  <!--<li><a href="#">Two</a></li>-->
+                  <!--<li><a href="#">Three</a></li>-->
+                <!--</ul>-->
+              <!--</li>-->
+              <li><a href="#">首页</a></li>
+              <li><a href="#">工单列表</a></li>
+              <li><a href="#">后台管理</a></li>
+            </ul>
+          </div>
+          <div class="top-bar-right">
+            <ul class="menu">
+              <li><input type="search" placeholder="搜索"></li>
+              <li><button type="button" class="button">搜索</button></li>
+                <li><a href="">退出</a></li>
+            </ul>
+          </div>
+        </div>
+        <p></p>
+        <div class="grid-x">
+            <div class="cell small-1">
+                <ul class="vertical menu">
+  <li><a href="#" class="button">新增工单</a></li>
+  <li><a href="#"></a></li>
+  <li><a href="#">待归类</a></li>
+  <li><a href="#">待归类</a></li>
+</ul>
+            </div>
+            <div class="cell small-1">
+                <p></p>
+            </div>
+              <div class="cell medium-6 large-10">
+                  <nav aria-label="You are here:" role="navigation">
+  <ul class="breadcrumbs">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">新增工单</a></li>
+    <li class="disabled">Gene Splicing</li>
+    <li>
+      <span class="show-for-sr">Current: </span> Cloning
+    </li>
+  </ul>
+</nav>
+    <div id="wizard">
+        <h3>Keyboard</h3>
+        <section>
+          <form>
+          <div class="row">
+            <div class="medium-6 columns">
+              <label>Input Label
+                <input type="text" placeholder=".medium-6.columns">
+              </label>
+            </div>
+            <div class="medium-6 columns">
+              <label>Input Label
+                <input type="text" placeholder=".medium-6.columns">
+              </label>
+            </div>
+          </div>
+        </form>
+        </section>
+        <h3>Effects</h3>
+        <section>
+            <p>Wonderful transition effects.</p>
+        </section>
+        <h3>Pager</h3>
+        <section>
+            <p>The next and previous buttons help you to navigate through your content.</p>
+        </section>
+    </div>
+
+
+              </div>
+</div>
+        <p></p>
+        <div class="cell footer">
+            <p style="text-align: center">版权© 2017️</p>
+        </div>
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/what-input/dist/what-input.js"></script>
+    <script src="bower_components/foundation-sites/dist/js/foundation.js"></script>
+    <script src="bower_components/jquery.steps/build/jquery.steps.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        $("#wizard").steps({
+    headerTag: "h3",
+    bodyTag: "section",
+    transitionEffect: "slideLeft",
+    autoFocus: true
+});
+    </script>
+  </body>
+</html>
