@@ -4,46 +4,112 @@ from __future__ import unicode_literals
 from restless.dj import DjangoResource
 from restless.preparers import FieldsPreparer
 
-from app.models import Ticket
+from app.models import *
 
 
-class TicketResource(DjangoResource):
-    # Controls what data is included in the serialized output.
-    preparer = FieldsPreparer(fields={
-        'id': 'id',
-        'ticket_id': 'ticket_id',
-        'status': 'status',
-    })
 
-    # GET /
+DBMapping = {
+    'sales': {
+        'db': Sales,
+        'fields': {
+            'id': 'id',
+            'name': 'name',
+            'address': 'address',
+            'email': 'email',
+            'phone': 'phone',
+            'remark': 'remark'
+        }
+    },
+    'customs': {
+        'db': Custom,
+        'fields': {
+            'id': 'id',
+            'name': 'name',
+            'address': 'address',
+            'email': 'email',
+            'phone': 'phone',
+            'remark': 'remark'
+        }
+    },
+    'engineers': {
+        'db': Engineer,
+        'fields': {
+            'id': 'id',
+            'name': 'name',
+            'gender': 'gender',
+            'email': 'email',
+            'phone': 'phone',
+            'rank': 'rank',
+            'remark': 'remark'
+        }
+    },
+    'templates': {
+        'db': TicketTemplate,
+        'fields': {
+            'id': 'id',
+            'type_1': 'type_1',
+            'type_2': 'type_2',
+            'type_3': 'type_3',
+            'type_4': 'type_4',
+            'score': 'score',
+            'level': 'level'
+        }
+    },
+}
+
+
+
+class SalesResource(DjangoResource):
+    """ 展示销售数据
+    """
+    preparer = FieldsPreparer(fields=DBMapping['sales']['fields'])
+    # 
     def list(self):
-        return Ticket.objects.all()
+        return DBMapping['sales']['db'].objects.all()
 
     # GET /pk/
     def detail(self, pk):
-        return Ticket.objects.get(id=pk)
+        return DBMapping['sales']['db'].objects.get(id=pk)
 
-    # POST /
-    def create(self):
-        return Ticket.objects.create(
-            ticket_id=self.data['ticket_id'],
-            user=self.data['user'],
-            status=self.data['status']
-        )
 
-    # PUT /pk/
-    def update(self, pk):
-        try:
-            post = Ticket.objects.get(id=pk)
-        except Ticket.DoesNotExist:
-            post = Ticket()
 
-        post.title = self.data['title']
-        post.user = Ticket.objects.get(username=self.data['author'])
-        post.content = self.data['body']
-        post.save()
-        return post
+class CustomResource(DjangoResource):
+    """ 展示客户数据
+    """
+    preparer = FieldsPreparer(fields=DBMapping['customs']['fields'])
+    # 
+    def list(self):
+        return DBMapping['customs']['db'].objects.all()
 
-    # DELETE /pk/
-    def delete(self, pk):
-        Ticket.objects.get(id=pk).delete()
+    # GET /pk/
+    def detail(self, pk):
+        return DBMapping['customs']['db'].objects.get(id=pk)
+
+
+
+class EngineerResource(DjangoResource):
+    """ 展示工程师数据
+    """
+    preparer = FieldsPreparer(fields=DBMapping['engineers']['fields'])
+    # 
+    def list(self):
+        return DBMapping['engineers']['db'].objects.all()
+
+    # GET /pk/
+    def detail(self, pk):
+        return DBMapping['engineers']['db'].objects.get(id=pk)
+
+
+
+class TicketTemplateResource(DjangoResource):
+    """ 工单模板数据
+    """
+    preparer = FieldsPreparer(fields=DBMapping['templates']['fields'])
+    # 
+    def list(self):
+        return DBMapping['templates']['db'].objects.all()
+
+    # GET /pk/
+    def detail(self, pk):
+        return DBMapping['templates']['db'].objects.get(id=pk)
+
