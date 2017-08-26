@@ -81,6 +81,9 @@ class TicketTemplate(TimestampedModel):
     # 
     remark = models.CharField(u'描述', max_length=512, blank=True, null=True)
 
+    def __unicode__(self):
+        return self.type_4
+
 
 
 class Ticket(TimestampedModel):
