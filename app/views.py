@@ -15,9 +15,10 @@ def create_ticket(request):
     return render(request, "app/create_ticket.html")
 
 
-def ticket_detail(request):
+def ticket_detail(request, ticket_id):
     # return render_to_response("app/create_ticket.html")
-    return render(request, "app/ticket_detail.html")
+    print ticket_id
+    return render(request, "app/ticket_detail.html", {"ticket_id": ticket_id})
 
 
 def login(request):

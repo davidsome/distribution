@@ -1,13 +1,38 @@
+{% extends "base.html" %}
 {% block content %}
       <nav aria-label="You are here:" role="navigation">
         <ul class="breadcrumbs">
-        <li><a href="/">首页</a></li>
-        <li><a href="/">工单详情页</a></li>
+            <li><a href="/">首页</a></li>
+            <li><a href="/">工单详情页</a></li>
             <li><a href=""></a></li>
         </ul>
-        </nav>
+      </nav>
+      <div id="ticket_detail_content"></div>
 {% endblock %}
 {% block css %}
 {% endblock %}
 {% block js %}
+    <script id="ticket_detail" type="text/html">
+        <table class="display-table hover">
+            <tbody>
+                <% for (var key in list) { %>
+                <tr>
+                    <td><%=key%></td>
+                    <td><%=list[key]%></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </script>
+    <script>
+    $(function () {
+        $.getJSON(API_URI["tickets"]+"?ticket_id={{ ticket_id }}").done(function (res) {
+            var data = {
+                list: res["data"]
+            };
+            var html = template('ticket_detail', data);
+            document.getElementById('ticket_detail_content').innerHTML = html;
+        });
+    });
+    </script>
 {% endblock %}

@@ -5,6 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>工单系统</title>
+          <link rel="stylesheet" href="/static/bower_components/toastr/toastr.min.css">
     <link rel="stylesheet" href="/static/css/app.css">
     <link rel="stylesheet" href="/static/css/common.css">
     {% block css %}{% endblock %}
@@ -38,7 +39,7 @@
         </div>
         <p></p>
         <div class="grid-x">
-            <div class="cell small-1">
+            <div class="cell small-2" style="padding-right: 20px">
                 <ul class="vertical menu">
               <li><a href="/createTicket.html" class="button">新增工单</a></li>
               <li><a href="#"></a></li>
@@ -46,9 +47,9 @@
               <li><a href="#">待归类</a></li>
             </ul>
             </div>
-            <div class="cell small-1">
-                <p></p>
-            </div>
+{#            <div class="cell small-1">#}
+{#                <p></p>#}
+{#            </div>#}
               <div class="cell medium-6 large-10">
                 {% block content %}{% endblock %}
                 </div>
@@ -62,6 +63,8 @@
     <script src="/static/bower_components/jquery/dist/jquery.js"></script>
     <script src="/static/bower_components/what-input/dist/what-input.js"></script>
     <script src="/static/bower_components/foundation-sites/dist/js/foundation.js"></script>
+         <script src="/static/bower_components/toastr/toastr.min.js"></script>
+        <script src="/static/bower_components/art-template/lib/template-web.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/common.js"></script>
     {% block js %}{% endblock %}

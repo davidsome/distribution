@@ -10,7 +10,7 @@
     <li><a href="/">工单列表页</a></li>
     </ul>
     </nav>
-    <table id="ticket">
+    <table id="ticket" class="hover striped">
       <thead>
         <tr>
           <th width="200">工单号</th>
@@ -19,19 +19,39 @@
             <th>主导产品</th>
             <th>销售</th>
             <th>客户</th>
-            <th width="150">工单状态</th>
-            <th>操作</th>
+            <th>工单状态</th>
+            <th width="150">操作</th>
         </tr>
       </thead>
     </table>
+    <div class="reveal" id="deleteTicketModal" data-reveal>
+      <p>你确定删除此工单吗？</p>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 {% endblock %}
 {% block js %}
     <script src="/static/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/static/bower_components/datatables/media/js/dataTables.foundation.min.js"></script>
+
     <script>
     $(document).ready(function(){
         $('#ticket').DataTable({
-            "ajax": API_URI["tickets"]+"?render=dataTables"
+            "ajax": API_URI["tickets"]+"?render=dataTables",
+          "columnDefs": [
+            {
+                // The `data` parameter refers to the data for the cell (defined by the
+                // `data` option, which defaults to the column being worked with, in
+                // this case `data: 0`.
+                "render": function ( data, type, row ) {
+                    console.log(data)
+                    console.log(row)
+                    return "<a class='button success' href='/ticketDetail.html/"+row[0]+"'>详情</a> <a class='button alert' data-open='deleteTicketModal'>删除</a>";
+                },
+                "targets": 7
+            }
+        ]
         });
     });
     </script>

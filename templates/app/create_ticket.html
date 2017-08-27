@@ -3,7 +3,6 @@
   <link rel="stylesheet" href="/static/bower_components/jquery.steps/demo/css/jquery.steps.css">
   <link rel="stylesheet" href="/static/bower_components/datetimepicker/build/jquery.datetimepicker.min.css">
   <link rel="stylesheet" href="/static/bower_components/select2/dist/css/select2.min.css">
-  <link rel="stylesheet" href="/static/bower_components/toastr/toastr.min.css">
 {% endblock %}
 {% block content %}
        <nav aria-label="You are here:" role="navigation">
@@ -90,8 +89,6 @@
     <script src="/static/bower_components/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
     <script src="/static/bower_components/select2/dist/js/select2.min.js"></script>
     <script src="/static/bower_components/jquery.cxselect/jquery.cxselect.min.js"></script>
-    <script src="/static/bower_components/toastr/toastr.min.js"></script>
-    <script src="/static/bower_components/art-template/lib/template-web.js"></script>
     <script id="select-customers" type="text/html">
       <label for="">选择客户
         <select name="" id="" class="select-customers">
@@ -209,34 +206,33 @@
                 loading: "加载中 ..."
             },
             onFinished: function (event, currentIndex) {
-            console.log(event);
-            console.log(currentIndex);
-            var sales = $(".select-sales").select2("data")[0]["id"];
-            var customers = $(".select-customers").select2("data")[0]["id"];
-            var products = $(".select-products").select2("data")[0]["id"];
-            var areas = $(".select-areas").select2("data")[0]["id"];
-            var engineers = $(".select-engineers").select2("data")[0]["id"];
-            var service_start = formatDateTime($("#service_start_datetimepicker").datetimepicker('getValue'));
-            var service_end = formatDateTime($("#service_end_datetimepicker").datetimepicker('getValue'));
-            console.log(service_end)
-            var pro_name = $("input[name='pro_name']").val();
-            var ticket_temp = $("select[class='class4']").val();
+                console.log(event);
+                console.log(currentIndex);
+                var sales = $(".select-sales").select2("data")[0]["id"];
+                var customers = $(".select-customers").select2("data")[0]["id"];
+                var products = $(".select-products").select2("data")[0]["id"];
+                var areas = $(".select-areas").select2("data")[0]["id"];
+                var engineers = $(".select-engineers").select2("data")[0]["id"];
+                var service_start = formatDateTime($("#service_start_datetimepicker").datetimepicker('getValue'));
+                var service_end = formatDateTime($("#service_end_datetimepicker").datetimepicker('getValue'));
+                var pro_name = $("input[name='pro_name']").val();
+                var ticket_temp = $("select[class='class4']").val();
 
-            $.post(API_URI["tickets"], {
-                "pro_name": pro_name,
-                "sale": sales,
-                "customer": customers,
-                "product": products,
-                "area": areas,
-                "ticket_temp": ticket_temp,
-                "engineer": engineers,
-                "service_start": service_start,
-                "service_end": service_end
-            }).done(function (res) {
-                toastr.success('工单创建已完成，即将跳转工单页');
-                setTimeout('window.location.href = "/"',2000);
-            })
-        }
+                $.post(API_URI["tickets"], {
+                    "pro_name": pro_name,
+                    "sale": sales,
+                    "customer": customers,
+                    "product": products,
+                    "area": areas,
+                    "ticket_temp": ticket_temp,
+                    "engineer": engineers,
+                    "service_start": service_start,
+                    "service_end": service_end
+                }).done(function (res) {
+                    toastr.success('工单创建已完成，即将跳转工单页');
+                    setTimeout('window.location.href = "/"',2000);
+                })
+            }
         });
 
         $('#service_start_datetimepicker').datetimepicker({format: 'd-m-Y H:i:s'});
@@ -254,7 +250,7 @@
         //级联
         $.getJSON(API_URI["templates2"]).done(function (res) {
 
-         $('#select_class').cxSelect({
+            $('#select_class').cxSelect({
               selects: ['class1', 'class2', 'class3', 'class4'],  // 数组，请注意顺序
               jsonName: 'name',
               jsonValue: 'value',

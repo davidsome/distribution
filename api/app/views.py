@@ -5,6 +5,7 @@ from restless.dj import DjangoResource
 from restless.preparers import FieldsPreparer
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from collections import OrderedDict
 
 from app.models import *
 
@@ -195,28 +196,47 @@ def generate_ticket_id():
 
 @csrf_exempt
 def tickets(request):
-    print request.method
     if request.method == "GET":
         data = []
-        for t in Ticket.objects.all():
-            data.append({
-                "ticket_id": t.ticket_id,
-                "pro_name": t.pro_name,
-                "engineer": t.engineer.name,
-                "product": t.product.name,
-                "sale": t.sale.name,
-                "customer": t.custom.name,
-                "status": t.get_status_display(),
-            })
-        if request.GET.get("render") == "dataTables":
-            new_data = []
-            for d in data:
-                new_data.append(d.values())
-            return JsonResponse({"data": new_data})
+        # detail
+        if request.GET.get("ticket_id"):
+            t = Ticket.objects.get(ticket_id=request.GET.get("ticket_id"))
+            d = OrderedDict()
+            d["ticket_id"] = t.ticket_id
+            d["pro_name"] = t.pro_name
+            d["engineer"] = t.engineer.name
+            d["product"] = t.product.name
+            d["sale"] = t.sale.name
+            d["customer"] = t.custom.name
+            d["status"] = t.get_status_display()
+            d["trouble_report"] = t.trouble_report
+            d["knowledge_report"] = t.knowledge_report
+            d["service_start"] = t.service_start
+            d["service_end"] = t.service_end
+            d["score"] = t.score
+            d["remark"] = t.remark
+            return common_response(data=d)
+        # all
         else:
-            return common_response(data=data)
+            for t in Ticket.objects.all():
+                d = OrderedDict()
+                d["ticket_id"] = t.ticket_id
+                d["pro_name"] = t.pro_name
+                d["engineer"] = t.engineer.name
+                d["product"] = t.product.name
+                d["sale"] = t.sale.name
+                d["customer"] = t.custom.name
+                d["status"] = t.get_status_display()
+                data.append(d)
+            if request.GET.get("render") == "dataTables":
+                new_data = []
+                for d in data:
+                    new_data.append(d.values())
+                return JsonResponse({"data": new_data})
+            else:
+                return common_response(data=data)
     elif request.method == "POST":
-        print request.POST.get("service_start")
+        # create ticket
         Ticket.objects.create(
             ticket_id=generate_ticket_id(),
             pro_name=request.POST.get("pro_name"),
