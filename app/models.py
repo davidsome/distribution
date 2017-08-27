@@ -7,6 +7,21 @@ from distribution.db import TimestampedModel
 # Create your models here.
 
 
+class Products(TimestampedModel):
+    name = models.CharField(u'名称', max_length=128, blank=True, null=True)
+    remark = models.CharField(u'描述', max_length=512, blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Area(TimestampedModel):
+    name = models.CharField(u'名称', max_length=128, blank=True, null=True)
+    remark = models.CharField(u'描述', max_length=512, blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
+
 
 class Sales(TimestampedModel):
     """ 销售信息
@@ -22,7 +37,6 @@ class Sales(TimestampedModel):
         return self.name
 
 
-
 class Custom(TimestampedModel):
     """ 客户表信息
     """
@@ -35,7 +49,6 @@ class Custom(TimestampedModel):
 
     def __unicode__(self):
         return self.name
-
 
 
 class Engineer(TimestampedModel):
@@ -58,7 +71,6 @@ class Engineer(TimestampedModel):
 
     def __unicode__(self):
         return self.name
-
 
 
 class TicketTemplate(TimestampedModel):
@@ -85,7 +97,6 @@ class TicketTemplate(TimestampedModel):
         return self.type_4
 
 
-
 class Ticket(TimestampedModel):
     """ 工单表信息
     """
@@ -100,9 +111,13 @@ class Ticket(TimestampedModel):
     # 
     ticket_id = models.CharField(u'工单号', max_length=32, unique=True)
     pro_name = models.CharField(u'项目名称', max_length=128, blank=True, null=True)
-    engineer = models.ForeignKey(Engineer)
-    ticket_temp = models.ForeignKey(TicketTemplate)
-    status = models.SmallIntegerField(u'工单状态', choices=TSTATUS,default=0)
+    engineer = models.ForeignKey(Engineer, null=True)
+    sale = models.ForeignKey(Sales, null=True)
+    custom = models.ForeignKey(Custom, null=True)
+    ticket_temp = models.ForeignKey(TicketTemplate, null=True)
+    products = models.ForeignKey(Products, null=True)
+    areas = models.ForeignKey(Area, null=True)
+    status = models.SmallIntegerField(u'工单状态', choices=TSTATUS, default=0)
     score = models.FloatField(u'分值', default=0, null=True)
     report = models.CharField(u'服务内容', max_length=1024, blank=True, null=True)
     trouble_report = models.CharField(u'故障报告', max_length=128, blank=True, null=True)

@@ -5,7 +5,6 @@ from django.contrib import admin
 from app.models import *
 
 
-
 class BaseAdmin(admin.ModelAdmin):
     """ 后台信息基类
     """
@@ -25,7 +24,6 @@ class SalesAdmin(BaseAdmin):
 admin.site.register(Sales, SalesAdmin)
 
 
-
 class CunstomAdmin(BaseAdmin):
     """ 客户信息后台
     """
@@ -39,10 +37,10 @@ class CunstomAdmin(BaseAdmin):
 admin.site.register(Custom, CunstomAdmin)
 
 
-
 class TicketInline(admin.StackedInline):
     model = Ticket
     extra = 1
+
 
 class EngineerAdmin(BaseAdmin):
     """ 工程师信息后台
@@ -56,7 +54,6 @@ class EngineerAdmin(BaseAdmin):
         ]
 
 admin.site.register(Engineer, EngineerAdmin)
-
 
 
 class TicketTemplateAdmin(BaseAdmin):
@@ -73,7 +70,6 @@ class TicketTemplateAdmin(BaseAdmin):
 admin.site.register(TicketTemplate, TicketTemplateAdmin)
 
 
-
 class TicketAdmin(BaseAdmin):
     """ 工单信息后台
     """
@@ -86,3 +82,5 @@ class TicketAdmin(BaseAdmin):
         ]
 
 admin.site.register(Ticket, TicketAdmin)
+admin.site.register(Products)
+admin.site.register(Area)

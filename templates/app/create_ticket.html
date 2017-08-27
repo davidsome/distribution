@@ -18,41 +18,21 @@
           <div class="row">
             <div class="medium-6 columns">
               <label>项目名称
-                <input type="text" placeholder="项目名称">
+                <input type="text" placeholder="项目名称" name="pro_name">
               </label>
             </div>
               <div class="medium-6 columns">
-                                <label for="">选择销售
-                <select name="" id="" class="select-sales">
-                    <option value="">mmm</option>
-                </select>
-              </label>
+                  <div id="select-sales-content"></div>
               </div>
                             <div class="medium-6 columns">
 
-              <label for="">选择客户
-                <select name="" id="" class="select-customers">
-                    <option value=""></option>
-                </select>
-              </label>
                                 <div id="select-customers-content"></div>
                                               </div>
                             <div class="medium-6 columns">
-
-              <label for="">选择主导产品
-                  <select name="" id="" class="select-products">
-                      <option value=""></option>
-                  </select>
-              </label>
+                                <div id="select-products-content"></div>
                </div>
                             <div class="medium-6 columns">
-
-              <label for="">
-                  选择服务区域
-                  <select name="" id="" class="select-areas">
-                      <option value=""></option>
-                  </select>
-              </label>
+                                <div id="select-areas-content"></div>
                </div>
 
           </div>
@@ -88,15 +68,13 @@
         <section>
             <div class="row">
                 <div class="medium-6 columns">
-                    <label for="">选择工程师
-              <select>
-                  <option value=""></option>
-              </select></label>
-            </div>
-            <div class="medium-6 columns">
-              <label>项目名称
-                <input type="text" placeholder="选择日期" id="datetimepicker">
-              </label>            </div>
+                    <div id="select-engineers-content"></div>
+                </div>
+                <div class="medium-6 columns">
+                  <label>日期
+                    <input type="text" placeholder="选择日期" id="datetimepicker">
+                  </label>
+                </div>
             </div>
         </section>
     </div>
@@ -112,42 +90,179 @@
       <label for="">选择客户
         <select name="" id="" class="select-customers">
             <% for (var i = 0; i < list.length; i ++) { %>
-                <option value=""><%= i + 1 %> ：<%= list[i] %></option>
+                <option value="<%= i + 1 %>"><%= list[i].name %></option>
             <% } %>
             data: <%=$data%>
         </select>
       </label>
     </script>
-    <script id="select-sales" type="text/html"></script>
-    <script id="select-products" type="text/html"></script>
-    <script id="select-areas" type="text/html"></script>
+    <script id="select-sales" type="text/html">
+
+    <label for="">选择销售
+        <select name="" id="" class="select-sales">
+            <% for (var i = 0; i < list.length; i ++) { %>
+                <option value="<%= list[i].id %>"><%= list[i].name %></option>
+            <% } %>
+            data: <%=$data%>
+        </select>
+              </label>
+
+    </script>
+    <script id="select-products" type="text/html">
+        <label for="">选择主导产品
+        <select name="" id="" class="select-products">
+            <% for (var i = 0; i < list.length; i ++) { %>
+                <option value=""><%= list[i].name %></option>
+            <% } %>
+            data: <%=$data%>
+        </select>
+              </label>
+</script>
+    <script id="select-areas" type="text/html">
+            <label for="">选择服务区域
+        <select name="" id="" class="select-areas">
+            <% for (var i = 0; i < list.length; i ++) { %>
+                <option value=""><%= list[i].name %></option>
+            <% } %>
+            data: <%=$data%>
+        </select>
+              </label>
+</script>
+    <script id="select-engineers" type="text/html">
+        <label for="">选择工程师
+            <select name="" id="" class="select-engineers">
+                <% for (var i = 0; i < list.length; i ++) { %>
+                    <option value=""><%= list[i].name %></option>
+                <% } %>
+                data: <%=$data%>
+            </select>
+        </label>
+    </script>
     <script>
-        var data = {
-            list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
-        };
-        var html = template('select-customers', data);
-        document.getElementById('select-customers-content').innerHTML = html;
+
+    $(function () {
+        $.getJSON(API_URI["customers"]).done(function (res) {
+            var data = {
+                list: res["objects"]
+            };
+            var html = template('select-customers', data);
+            document.getElementById('select-customers-content').innerHTML = html;
+                    $(".select-customers").select2();
+
+        });
+
+        $.getJSON(API_URI["sales"]).done(function (res) {
+            var data = {
+                list: res["objects"]
+            };
+            var html = template('select-sales', data);
+            document.getElementById('select-sales-content').innerHTML = html;
+            $(".select-sales").select2();
+
+        });
+
+        $.getJSON(API_URI["engineers"]).done(function (res) {
+            var data = {
+                list: res["objects"]
+            };
+            var html = template('select-engineers', data);
+            document.getElementById('select-engineers-content').innerHTML = html;
+            $(".select-engineers").select2();
+
+        });
+
+        $.getJSON(API_URI["products"]).done(function (res) {
+            var data = {
+                list: res["objects"]
+            };
+            var html = template('select-products', data);
+            document.getElementById('select-products-content').innerHTML = html;
+            $(".select-products").select2();
+
+        });
+
+
+        $.getJSON(API_URI["areas"]).done(function (res) {
+            var data = {
+                list: res["objects"]
+            };
+            var html = template('select-areas', data);
+            document.getElementById('select-areas-content').innerHTML = html;
+            $(".select-areas").select2();
+
+        });
 
         $("#wizard").steps({
             headerTag: "h3",
             bodyTag: "section",
             transitionEffect: "slideLeft",
             autoFocus: true,
-            onFinished: function (event, currentIndex) { toastr.success('已完成')}
+            labels: {
+                cancel: "取消",
+                current: "current step:",
+                pagination: "Pagination",
+                finish: "提交",
+                next: "下一步",
+                previous: "上一步",
+                loading: "加载中 ..."
+            },
+            onFinished: function (event, currentIndex) {
+                console.log(event);
+                console.log(currentIndex);
+                toastr.success('已完成');
+                console.log($("select.select-sales").select2("data")[0]);
+            var sales = $(".select-sales").select2("data")[0];
+            var customers = $(".select-customers").select2("data")[0];
+            var products = $(".select-products").select2("data")[0];
+            var areas = $(".select-areas").select2("data")[0];
+            var engineers = $(".select-engineers").select2("data")[0];
+                var datetime = $("#datetimepicker").datetimepicker('getValue');
+                var pro_name = $("input[name='pro_name']").val();
+                console.log(datetime);
+
+                //$.post().done(function (res) {
+
+                //})
+        }
         });
 
         $('#datetimepicker').datetimepicker();
 
-        $(".select-sales").select2();
-        $(".select-customers").select2();
         $(".select-products").select2();
         $(".select-areas").select2();
 
         //级联
-        $('#select_class').cxSelect({
-          url: 'cityData.min.json',               // 如果服务器不支持 .json 类型文件，请将文件改为 .js 文件
-          selects: ['class1', 'class2', 'class3', 'class4'],  // 数组，请注意顺序
-          emptyStyle: 'none'
+
+        $.getJSON(API_URI["templates2"]).done(function (res) {
+
+
+         $('#select_class').cxSelect({
+              selects: ['class1', 'class2', 'class3', 'class4'],  // 数组，请注意顺序
+              jsonName: 'name',
+              jsonValue: 'value',
+              jsonSub: 'sub',
+              emptyStyle: 'none',
+              data: [
+                {name:'A', value: '1', sub: [
+                  {name: 'A-1', value: '2', sub: [
+                    {name: 'A-1-1', value: '11'}
+                    // more..
+                  ]},
+                  {name: 'A-2', value: '3', sub: [
+                    {name: 'A-2-1', value: '34'}
+                  ]}
+                  // more..
+                ]},
+                {name:'B', value: '5', sub: [
+                  {name: 'B-1', value: '8', sub: [
+                    {name: 'B-1-1', value: '16'}
+                  ]}
+                ]}
+              ]
+            });
         });
+
+    });
+
     </script>
 {% endblock%}

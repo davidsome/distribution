@@ -8,5 +8,8 @@ urlpatterns = [
 
     # Add this!
     url(r'^$', index),
-    url(r'^createTicket', create_ticket)
+    url(r'^createTicket', create_ticket),
+    url(r'^ticketDetail', ticket_detail),
+    url(r'^logout', logout),
+    url(r'^login', login),
 ]
