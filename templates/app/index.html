@@ -6,58 +6,23 @@
 {% block content %}
   <nav aria-label="You are here:" role="navigation">
     <ul class="breadcrumbs">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">工单列表页</a></li>
+    <li><a href="/">首页</a></li>
+    <li><a href="/">工单列表页</a></li>
     </ul>
     </nav>
     <table id="ticket">
       <thead>
         <tr>
           <th width="200">工单号</th>
-            <th>工单主题</th>
-          <th>受理人</th>
-          <th width="150">工单状态</th>
-          <th width="150">分派日期</th>
+            <th>项目名称</th>
+            <th>指派工程师</th>
+            <th>主导产品</th>
+            <th>销售</th>
+            <th>客户</th>
+            <th width="150">工单状态</th>
             <th>操作</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>TAS123123</td>
-            <td>外卖</td>
-          <td>徐姓龙</td>
-          <td>已分派</td>
-          <td>2017-08-18 00:00:11</td>
-            <td>
-                <a href="" class="alert button">删除</a>
-                <a href="" class="success button">详情</a>
-            </td>
-        </tr>
-        <tr>
-          <td>TAS123423123</td>
-                                        <td>外卖</td>
-
-          <td>徐姓龙</td>
-          <td>已分派</td>
-          <td>2017-08-18 00:00:11</td>
-        <td><a href="" class="alert button">删除</a>
-                                        <a href="" class="success button">详情</a>
-
-        </td>
-
-        </tr>
-        <tr>
-          <td>TAS12343123</td>
-                                        <td>外卖</td>
-          <td>老毛</td>
-          <td>已分派</td>
-          <td>2017-08-18 00:00:11</td>
-        <td><a href="" class="alert button">删除</a>
-                                        <a href="" class="success button">详情</a>
-        </td>
-
-        </tr>
-      </tbody>
     </table>
 {% endblock %}
 {% block js %}
@@ -65,7 +30,9 @@
     <script src="/static/bower_components/datatables/media/js/dataTables.foundation.min.js"></script>
     <script>
     $(document).ready(function(){
-    $('#ticket').DataTable();
-});
+        $('#ticket').DataTable({
+            "ajax": API_URI["tickets"]+"?render=dataTables"
+        });
+    });
     </script>
 {% endblock %}

@@ -115,16 +115,16 @@ class Ticket(TimestampedModel):
     sale = models.ForeignKey(Sales, null=True)
     custom = models.ForeignKey(Custom, null=True)
     ticket_temp = models.ForeignKey(TicketTemplate, null=True)
-    products = models.ForeignKey(Products, null=True)
-    areas = models.ForeignKey(Area, null=True)
+    product = models.ForeignKey(Products, null=True)
+    area = models.ForeignKey(Area, null=True)
     status = models.SmallIntegerField(u'工单状态', choices=TSTATUS, default=0)
     score = models.FloatField(u'分值', default=0, null=True)
     report = models.CharField(u'服务内容', max_length=1024, blank=True, null=True)
     trouble_report = models.CharField(u'故障报告', max_length=128, blank=True, null=True)
     knowledge_report = models.CharField(u'知识库', max_length=128, blank=True, null=True)
     # 
-    service_start = models.DateField(u'服务开始时间', blank=True, null=True)
-    service_end = models.DateField(u'服务结束时间', blank=True, null=True)
+    service_start = models.DateTimeField(u'服务开始时间', blank=True, null=True)
+    service_end = models.DateTimeField(u'服务结束时间', blank=True, null=True)
     # 
     remark = models.CharField(u'描述', max_length=512, blank=True, null=True)
 

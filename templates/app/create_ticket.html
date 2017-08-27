@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-      {% block css %}
-<link rel="stylesheet" href="/static/bower_components/jquery.steps/demo/css/jquery.steps.css">
-<link rel="stylesheet" href="/static/bower_components/datetimepicker/build/jquery.datetimepicker.min.css">
-          <link rel="stylesheet" href="/static/bower_components/select2/dist/css/select2.min.css">
-          <link rel="stylesheet" href="/static/bower_components/toastr/toastr.min.css">
+{% block css %}
+  <link rel="stylesheet" href="/static/bower_components/jquery.steps/demo/css/jquery.steps.css">
+  <link rel="stylesheet" href="/static/bower_components/datetimepicker/build/jquery.datetimepicker.min.css">
+  <link rel="stylesheet" href="/static/bower_components/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="/static/bower_components/toastr/toastr.min.css">
 {% endblock %}
 {% block content %}
        <nav aria-label="You are here:" role="navigation">
-  <ul class="breadcrumbs">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">新增工单</a></li>
-  </ul>
-</nav>
+          <ul class="breadcrumbs">
+            <li><a href="/">首页</a></li>
+            <li><a href="/createTicket.html">新增工单</a></li>
+          </ul>
+        </nav>
        <div id="wizard">
         <h3>第一步</h3>
         <section>
@@ -24,17 +24,15 @@
               <div class="medium-6 columns">
                   <div id="select-sales-content"></div>
               </div>
-                            <div class="medium-6 columns">
-
-                                <div id="select-customers-content"></div>
-                                              </div>
-                            <div class="medium-6 columns">
-                                <div id="select-products-content"></div>
+                <div class="medium-6 columns">
+                    <div id="select-customers-content"></div>
+              </div>
+                <div class="medium-6 columns">
+                    <div id="select-products-content"></div>
                </div>
-                            <div class="medium-6 columns">
-                                <div id="select-areas-content"></div>
+            <div class="medium-6 columns">
+                <div id="select-areas-content"></div>
                </div>
-
           </div>
         </section>
         <h3>第二步</h3>
@@ -71,8 +69,16 @@
                     <div id="select-engineers-content"></div>
                 </div>
                 <div class="medium-6 columns">
-                  <label>日期
-                    <input type="text" placeholder="选择日期" id="datetimepicker">
+                  <label>服务开始时间
+                    <input type="text" placeholder="选择日期" id="service_start_datetimepicker">
+                  </label>
+                </div>
+                <div class="medium-6 columns">
+                    <div id="select-engineers-content"></div>
+                </div>
+                <div class="medium-6 columns">
+                  <label>服务结束时间
+                    <input type="text" placeholder="选择日期" id="service_end_datetimepicker">
                   </label>
                 </div>
             </div>
@@ -90,14 +96,13 @@
       <label for="">选择客户
         <select name="" id="" class="select-customers">
             <% for (var i = 0; i < list.length; i ++) { %>
-                <option value="<%= i + 1 %>"><%= list[i].name %></option>
+                <option value="<%= list[i].id %>"><%= list[i].name %></option>
             <% } %>
             data: <%=$data%>
         </select>
       </label>
     </script>
     <script id="select-sales" type="text/html">
-
     <label for="">选择销售
         <select name="" id="" class="select-sales">
             <% for (var i = 0; i < list.length; i ++) { %>
@@ -106,33 +111,32 @@
             data: <%=$data%>
         </select>
               </label>
-
     </script>
     <script id="select-products" type="text/html">
         <label for="">选择主导产品
         <select name="" id="" class="select-products">
             <% for (var i = 0; i < list.length; i ++) { %>
-                <option value=""><%= list[i].name %></option>
+                <option value="<%= list[i].id %>"><%= list[i].name %></option>
             <% } %>
             data: <%=$data%>
         </select>
               </label>
-</script>
+    </script>
     <script id="select-areas" type="text/html">
             <label for="">选择服务区域
-        <select name="" id="" class="select-areas">
-            <% for (var i = 0; i < list.length; i ++) { %>
-                <option value=""><%= list[i].name %></option>
-            <% } %>
-            data: <%=$data%>
-        </select>
-              </label>
-</script>
+            <select name="" id="" class="select-areas">
+                <% for (var i = 0; i < list.length; i ++) { %>
+                    <option value="<%= list[i].id %>"><%= list[i].name %></option>
+                <% } %>
+                data: <%=$data%>
+            </select>
+          </label>
+    </script>
     <script id="select-engineers" type="text/html">
         <label for="">选择工程师
             <select name="" id="" class="select-engineers">
                 <% for (var i = 0; i < list.length; i ++) { %>
-                    <option value=""><%= list[i].name %></option>
+                    <option value="<%= list[i].id %>"><%= list[i].name %></option>
                 <% } %>
                 data: <%=$data%>
             </select>
@@ -147,8 +151,7 @@
             };
             var html = template('select-customers', data);
             document.getElementById('select-customers-content').innerHTML = html;
-                    $(".select-customers").select2();
-
+            $(".select-customers").select2();
         });
 
         $.getJSON(API_URI["sales"]).done(function (res) {
@@ -181,7 +184,6 @@
 
         });
 
-
         $.getJSON(API_URI["areas"]).done(function (res) {
             var data = {
                 list: res["objects"]
@@ -207,34 +209,50 @@
                 loading: "加载中 ..."
             },
             onFinished: function (event, currentIndex) {
-                console.log(event);
-                console.log(currentIndex);
-                toastr.success('已完成');
-                console.log($("select.select-sales").select2("data")[0]);
-            var sales = $(".select-sales").select2("data")[0];
-            var customers = $(".select-customers").select2("data")[0];
-            var products = $(".select-products").select2("data")[0];
-            var areas = $(".select-areas").select2("data")[0];
-            var engineers = $(".select-engineers").select2("data")[0];
-                var datetime = $("#datetimepicker").datetimepicker('getValue');
-                var pro_name = $("input[name='pro_name']").val();
-                console.log(datetime);
+            console.log(event);
+            console.log(currentIndex);
+            var sales = $(".select-sales").select2("data")[0]["id"];
+            var customers = $(".select-customers").select2("data")[0]["id"];
+            var products = $(".select-products").select2("data")[0]["id"];
+            var areas = $(".select-areas").select2("data")[0]["id"];
+            var engineers = $(".select-engineers").select2("data")[0]["id"];
+            var service_start = formatDateTime($("#service_start_datetimepicker").datetimepicker('getValue'));
+            var service_end = formatDateTime($("#service_end_datetimepicker").datetimepicker('getValue'));
+            console.log(service_end)
+            var pro_name = $("input[name='pro_name']").val();
+            var ticket_temp = $("select[class='class4']").val();
 
-                //$.post().done(function (res) {
-
-                //})
+            $.post(API_URI["tickets"], {
+                "pro_name": pro_name,
+                "sale": sales,
+                "customer": customers,
+                "product": products,
+                "area": areas,
+                "ticket_temp": ticket_temp,
+                "engineer": engineers,
+                "service_start": service_start,
+                "service_end": service_end
+            }).done(function (res) {
+                toastr.success('工单创建已完成，即将跳转工单页');
+                setTimeout('window.location.href = "/"',2000);
+            })
         }
         });
 
-        $('#datetimepicker').datetimepicker();
+        $('#service_start_datetimepicker').datetimepicker({format: 'd-m-Y H:i:s'});
+        $('#service_end_datetimepicker').datetimepicker({format: 'd-m-Y H:i:s'});
 
-        $(".select-products").select2();
-        $(".select-areas").select2();
+        function formatDateTime(datetime){
+            return datetime.getFullYear() + "-"
+                    + (datetime.getMonth() + 1)
+                    + "-" + datetime.getDate()
+                    + " " + datetime.getHours()
+                    + ":" + datetime.getMinutes()
+                    + ":" + datetime.getSeconds();
+        }
 
         //级联
-
         $.getJSON(API_URI["templates2"]).done(function (res) {
-
 
          $('#select_class').cxSelect({
               selects: ['class1', 'class2', 'class3', 'class4'],  // 数组，请注意顺序
@@ -242,27 +260,9 @@
               jsonValue: 'value',
               jsonSub: 'sub',
               emptyStyle: 'none',
-              data: [
-                {name:'A', value: '1', sub: [
-                  {name: 'A-1', value: '2', sub: [
-                    {name: 'A-1-1', value: '11'}
-                    // more..
-                  ]},
-                  {name: 'A-2', value: '3', sub: [
-                    {name: 'A-2-1', value: '34'}
-                  ]}
-                  // more..
-                ]},
-                {name:'B', value: '5', sub: [
-                  {name: 'B-1', value: '8', sub: [
-                    {name: 'B-1-1', value: '16'}
-                  ]}
-                ]}
-              ]
+              data: res.data
             });
         });
-
     });
-
     </script>
 {% endblock%}

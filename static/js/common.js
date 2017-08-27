@@ -7,4 +7,5 @@ var API_URI = {
     "engineers": API_PREFIX + "engineers",
     "templates": API_PREFIX + "templates",
     "templates2": API_PREFIX + "templates2",
+    "tickets": API_PREFIX + "tickets"
 };
