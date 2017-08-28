@@ -13,8 +13,8 @@
   <body>
     <div class="">
         <div class="top-bar">
-          <div class="top-bar-left">
-            <ul class="dropdown menu" data-dropdown-menu>
+          <div class="top-bar-left hover-underline-menu" data-menu-underline-from-center>
+            <ul class="dropdown menu " data-dropdown-menu >
               <li class="menu-text">工单系统</li>
               <!--<li>-->
                 <!--<a href="#">One</a>-->
@@ -67,7 +67,14 @@
         <script src="/static/bower_components/art-template/lib/template-web.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/common.js"></script>
-    {% block js %}{% endblock %}
+    <script>
+        $(function () {
+            $("[data-menu-underline-from-center] a").addClass("underline-from-center");
+        })
+    </script>
+    {% block js %}
+
+    {% endblock %}
 
   </body>
 </html>

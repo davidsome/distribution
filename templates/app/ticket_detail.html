@@ -4,10 +4,17 @@
         <ul class="breadcrumbs">
             <li><a href="/">首页</a></li>
             <li><a href="/">工单详情页</a></li>
-            <li><a href=""></a></li>
+            <li><a href="">{{ ticket_id }}</a></li>
         </ul>
       </nav>
-      <div id="ticket_detail_content"></div>
+      <div class="grid">
+        <div class="cell">
+            <div id="ticket_detail_content"></div>
+        </div>
+        <div class="cell">
+            <a class="button success" href="/">返回</a>
+        </div>
+      </div>
 {% endblock %}
 {% block css %}
 {% endblock %}
@@ -17,7 +24,7 @@
             <tbody>
                 <% for (var key in list) { %>
                 <tr>
-                    <td><%=values[key]%></td>
+                    <td><strong><%=values[key]%></strong></td>
                     <td><%=list[key]%></td>
                 </tr>
                 <% } %>

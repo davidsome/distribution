@@ -5,3 +5,71 @@
 .select2-container {
     min-width: 100px;
 }
+
+/*nav bar*/
+
+.top-bar {
+  background: #333;
+  color: #fefefe;
+}
+
+.top-bar .menu {
+  background: #333;
+}
+
+.top-bar .menu a {
+  color: #fefefe;
+}
+
+.top-bar .is-dropdown-submenu {
+  border: 0;
+}
+
+.top-bar .is-dropdown-submenu-item.opens-right a::after {
+  border-color: transparent transparent transparent #fefefe;
+}
+
+.top-bar .js-drilldown-back > a::before {
+  border-color: transparent #fefefe transparent transparent;
+}
+
+.top-bar .is-drilldown-submenu-parent > a::after {
+  border-color: transparent transparent transparent #fefefe;
+}
+
+.top-bar .dropdown.menu.medium-horizontal > li.is-dropdown-submenu-parent > a::after {
+  border-color: #fefefe transparent transparent;
+}
+
+
+
+.hover-underline-menu {
+}
+
+.hover-underline-menu .menu {
+}
+
+.hover-underline-menu .menu a {
+  color: #fefefe;
+}
+
+.hover-underline-menu .menu .underline-from-center {
+  position: relative;
+}
+
+.hover-underline-menu .menu .underline-from-center::after {
+  content: "";
+  position: absolute;
+  top: calc(100% - 0.125rem);
+  border-bottom: 0.125rem solid #fefefe;
+  left: 50%;
+  right: 50%;
+  transition: all 0.5s ease;
+}
+
+.hover-underline-menu .menu .underline-from-center:hover::after {
+  left: 0;
+  right: 0;
+  transition: all 0.5s ease;
+}
+

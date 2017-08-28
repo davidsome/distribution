@@ -22,9 +22,9 @@ def ticket_detail(request, ticket_id):
 
 
 def login(request):
-    return HttpResponseRedirect('/admin')
+    return HttpResponseRedirect('/admin/')
 
 
 def logout(request):
-    return HttpResponseRedirect('/admin')
+    return HttpResponseRedirect('/admin/')
 
