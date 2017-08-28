@@ -1,3 +1,7 @@
 .wizard > .steps {
     height: 70px;
 }
+
+.select2-container {
+    min-width: 100px;
+}

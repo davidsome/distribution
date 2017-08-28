@@ -17,7 +17,7 @@
             <tbody>
                 <% for (var key in list) { %>
                 <tr>
-                    <td><%=key%></td>
+                    <td><%=values[key]%></td>
                     <td><%=list[key]%></td>
                 </tr>
                 <% } %>
@@ -28,7 +28,22 @@
     $(function () {
         $.getJSON(API_URI["tickets"]+"?ticket_id={{ ticket_id }}").done(function (res) {
             var data = {
-                list: res["data"]
+                list: res["data"],
+                values: {
+                    "ticket_id": "工单号",
+                    "pro_name": "项目",
+                    "engineer": "工程师",
+                    "product": "产品",
+                    "sale": "销售",
+                    "customer": "客户",
+                    "status": "工单状态",
+                    "trouble_report": "故障报告",
+                    "knowledge_report": "知识库",
+                    "service_start": "服务开始时间",
+                    "service_end": "服务结束时间",
+                    "score": "分值",
+                    "remark": "备注"
+                }
             };
             var html = template('ticket_detail', data);
             document.getElementById('ticket_detail_content').innerHTML = html;

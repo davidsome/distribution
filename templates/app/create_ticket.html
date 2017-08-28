@@ -90,7 +90,7 @@
     <script src="/static/bower_components/select2/dist/js/select2.min.js"></script>
     <script src="/static/bower_components/jquery.cxselect/jquery.cxselect.min.js"></script>
     <script id="select-customers" type="text/html">
-      <label for="">选择客户
+      <label for=""><p>选择客户</p>
         <select name="" id="" class="select-customers">
             <% for (var i = 0; i < list.length; i ++) { %>
                 <option value="<%= list[i].id %>"><%= list[i].name %></option>
@@ -100,7 +100,7 @@
       </label>
     </script>
     <script id="select-sales" type="text/html">
-    <label for="">选择销售
+    <label for=""><p>选择销售</p>
         <select name="" id="" class="select-sales">
             <% for (var i = 0; i < list.length; i ++) { %>
                 <option value="<%= list[i].id %>"><%= list[i].name %></option>
@@ -110,7 +110,7 @@
               </label>
     </script>
     <script id="select-products" type="text/html">
-        <label for="">选择主导产品
+        <label for=""><p>选择主导产品</p>
         <select name="" id="" class="select-products">
             <% for (var i = 0; i < list.length; i ++) { %>
                 <option value="<%= list[i].id %>"><%= list[i].name %></option>
@@ -120,7 +120,7 @@
               </label>
     </script>
     <script id="select-areas" type="text/html">
-            <label for="">选择服务区域
+            <label for=""><p>选择服务区域</p>
             <select name="" id="" class="select-areas">
                 <% for (var i = 0; i < list.length; i ++) { %>
                     <option value="<%= list[i].id %>"><%= list[i].name %></option>
@@ -130,7 +130,7 @@
           </label>
     </script>
     <script id="select-engineers" type="text/html">
-        <label for="">选择工程师
+        <label for=""><p>选择工程师</p>
             <select name="" id="" class="select-engineers">
                 <% for (var i = 0; i < list.length; i ++) { %>
                     <option value="<%= list[i].id %>"><%= list[i].name %></option>
