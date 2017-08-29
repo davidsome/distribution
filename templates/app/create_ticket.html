@@ -209,7 +209,27 @@
                 previous: "上一步",
                 loading: "加载中 ..."
             },
+            onStepChanging: function (event, currentIndex, newIndex) {
+                if (currentIndex == 0 && !$("input[name='pro_name']").val()){
+                    toastr.error("项目名称不能为空");
+                    return false;
+                }else if (currentIndex == 1 && !$("select[class='class4']").val()){
+                    toastr.error("分类选择不能为空");
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            },
             onFinished: function (event, currentIndex) {
+                if(currentIndex == 2 && !$("#service_start_datetimepicker").datetimepicker('getValue')){
+                    toastr.error("服务开始时间不能为空");
+                    return false;
+                }
+                if(currentIndex == 2 && !$("#service_end_datetimepicker").datetimepicker('getValue')){
+                    toastr.error("服务结束时间不能为空");
+                    return false;
+                }
                 console.log(event);
                 console.log(currentIndex);
                 var sales = $(".select-sales").select2("data")[0]["id"];
