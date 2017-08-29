@@ -46,8 +46,6 @@
                 // `data` option, which defaults to the column being worked with, in
                 // this case `data: 0`.
                 "render": function ( data, type, row ) {
-                    console.log(data)
-                    console.log(row)
                     return "<a class='button success' href='/ticketDetail.html/"+row[0]+"'>详情</a> <a class='button alert' data-open='deleteTicketModal'>删除</a>";
                 },
                 "targets": 7
