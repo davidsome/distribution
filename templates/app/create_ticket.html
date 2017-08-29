@@ -11,78 +11,80 @@
             <li><a href="/createTicket.html">新增工单</a></li>
           </ul>
         </nav>
-       <div id="wizard">
-        <h3>第一步</h3>
-        <section>
-          <div class="row">
-            <div class="medium-6 columns">
-              <label><strong>项目名称</strong>
-                <input type="text" placeholder="项目名称" name="pro_name">
-              </label>
+        <form action="" id="create_ticket_form">
+           <div id="wizard">
+                <h3>第一步</h3>
+                <section>
+                  <div class="row">
+                    <div class="medium-6 columns">
+                      <label><strong>项目名称</strong>
+                        <input type="text" placeholder="项目名称" name="pro_name" class="required">
+                      </label>
+                    </div>
+                      <div class="medium-6 columns">
+                          <div id="select-sales-content"></div>
+                      </div>
+                        <div class="medium-6 columns">
+                            <div id="select-customers-content"></div>
+                      </div>
+                        <div class="medium-6 columns">
+                            <div id="select-products-content"></div>
+                       </div>
+                    <div class="medium-6 columns">
+                        <div id="select-areas-content"></div>
+                       </div>
+                  </div>
+                </section>
+                <h3>第二步</h3>
+                <section>
+                    <div class="row">
+                        <div class="" id="select_class">
+                            <label for=""><strong>选择分类I</strong>
+                                <select name="" id="" class="class1">
+                                    <option value=""></option>
+                                </select>
+                            </label>
+                            <label for=""><strong>选择分类II</strong>
+                                <select name="" id="" class="class2">
+                                    <option value=""></option>
+                                </select>
+                            </label>
+                            <label for=""><strong>选择分类III</strong>
+                                <select name="" id="" class="class3">
+                                    <option value=""></option>
+                                </select>
+                            </label>
+                            <label for=""><strong>选择分类IV</strong>
+                                <select name="" id="" class="class4">
+                                    <option value=""></option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+                <h3>第三步</h3>
+                <section>
+                    <div class="row">
+                        <div class="medium-6 columns">
+                            <div id="select-engineers-content"></div>
+                        </div>
+                        <div class="medium-6 columns">
+                          <label><strong>服务开始时间</strong>
+                            <input type="text" placeholder="选择日期" id="service_start_datetimepicker">
+                          </label>
+                        </div>
+                        <div class="medium-6 columns">
+                            <div id="select-engineers-content"></div>
+                        </div>
+                        <div class="medium-6 columns">
+                          <label><strong>服务结束时间</strong>
+                            <input type="text" placeholder="选择日期" id="service_end_datetimepicker">
+                          </label>
+                        </div>
+                    </div>
+                </section>
             </div>
-              <div class="medium-6 columns">
-                  <div id="select-sales-content"></div>
-              </div>
-                <div class="medium-6 columns">
-                    <div id="select-customers-content"></div>
-              </div>
-                <div class="medium-6 columns">
-                    <div id="select-products-content"></div>
-               </div>
-            <div class="medium-6 columns">
-                <div id="select-areas-content"></div>
-               </div>
-          </div>
-        </section>
-        <h3>第二步</h3>
-        <section>
-            <div class="row">
-                <div class="" id="select_class">
-                    <label for=""><strong>选择分类I</strong>
-                        <select name="" id="" class="class1">
-                            <option value=""></option>
-                        </select>
-                    </label>
-                    <label for=""><strong>选择分类II</strong>
-                        <select name="" id="" class="class2">
-                            <option value=""></option>
-                        </select>
-                    </label>
-                    <label for=""><strong>选择分类III</strong>
-                        <select name="" id="" class="class3">
-                            <option value=""></option>
-                        </select>
-                    </label>
-                    <label for=""><strong>选择分类IV</strong>
-                        <select name="" id="" class="class4">
-                            <option value=""></option>
-                        </select>
-                    </label>
-                </div>
-            </div>
-        </section>
-        <h3>第三步</h3>
-        <section>
-            <div class="row">
-                <div class="medium-6 columns">
-                    <div id="select-engineers-content"></div>
-                </div>
-                <div class="medium-6 columns">
-                  <label><strong>服务开始时间</strong>
-                    <input type="text" placeholder="选择日期" id="service_start_datetimepicker">
-                  </label>
-                </div>
-                <div class="medium-6 columns">
-                    <div id="select-engineers-content"></div>
-                </div>
-                <div class="medium-6 columns">
-                  <label><strong>服务结束时间</strong>
-                    <input type="text" placeholder="选择日期" id="service_end_datetimepicker">
-                  </label>
-                </div>
-            </div>
-        </section>
-    </div>
+        </form>
 {% endblock %}
 {% block js %}
     <script src="/static/bower_components/jquery.steps/build/jquery.steps.min.js"></script>
@@ -191,6 +193,8 @@
 
         });
 
+        var form = $("#create_ticket_form");
+
         $("#wizard").steps({
             headerTag: "h3",
             bodyTag: "section",
@@ -249,7 +253,6 @@
 
         //级联
         $.getJSON(API_URI["templates2"]).done(function (res) {
-
             $('#select_class').cxSelect({
               selects: ['class1', 'class2', 'class3', 'class4'],  // 数组，请注意顺序
               jsonName: 'name',

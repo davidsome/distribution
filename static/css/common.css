@@ -3,7 +3,7 @@
 }
 
 .select2-container {
-    min-width: 100px;
+    width: 200px !important;
 }
 
 /*nav bar*/
