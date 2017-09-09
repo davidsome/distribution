@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="/static/bower_components/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="/static/bower_components/smartwizard/dist/css/smart_wizard.min.css">
   <link rel="stylesheet" href="/static/bower_components/smartwizard/dist/css/smart_wizard_theme_dots.min.css">
+  <link rel="stylesheet" href="/static/bower_components/smartwizard/dist/css/smart_wizard_theme_arrows.min.css">
 {% endblock %}
 {% block content %}
     <ol class="breadcrumb">
@@ -17,12 +18,14 @@
                 <li><a href="#step-1">第一步<br /><small>填写基本信息</small></a></li>
                 <li><a href="#step-2">第二步<br /><small>填写基本信息</small></a></li>
                 <li><a href="#step-3">第三步<br /><small>完成提交</small></a></li>
+
             </ul>
             <div>
                 <div id="step-1" class="">
+                    <div class="form-group"></div>
                    <div class="form-group">
                       <label class="col-sm-2 control-label"><strong>项目名称</strong></label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-4">
                         <input type="text" placeholder="项目名称" name="pro_name" class="form-control">
                         </div>
                     </div>
@@ -69,7 +72,7 @@
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label"><strong>服务开始时间</strong></label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-4">
                         <input type="text" placeholder="选择日期" id="service_start_datetimepicker" class="form-control">
                         </div>
                     </div>
@@ -78,7 +81,7 @@
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label"><strong>服务结束时间</strong></label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-4">
                         <input type="text" placeholder="选择日期" id="service_end_datetimepicker" class="form-control">
                       </div>
                     </div>
@@ -152,14 +155,71 @@
     </script>
     <script>
         $(function () {
-             $('#smartwizard').smartWizard({
-                             theme: 'dots',
-                             lang: {  // Language variables
+         $('#smartwizard').smartWizard({
+             theme: 'arrows',
+             lang: {  // Language variables
                 next: '下一步',
                 previous: '上一步'
             },
+             autoAdjustHeight: false,
+                    toolbarSettings: {
+                toolbarPosition: 'bottom', // none, top, bottom, both
+                toolbarButtonPosition: 'right', // left, right
+                showNextButton: true, // show/hide a Next button
+                showPreviousButton: true, // show/hide a Previous button
+                toolbarExtraButtons: [
 
-             });
+                      ]
+            }
+         });
+
+        $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+            if (stepNumber == 0 && !$("input[name='pro_name']").val()){
+                toastr.error("项目名称不能为空");
+                return false;
+            }else if (stepNumber == 1 && !$("select[class='class4']").val()){
+                toastr.error("分类选择不能为空");
+{#                return false;#}
+            }
+            else if(stepNumber == 2 && !$("#service_start_datetimepicker").datetimepicker('getValue')){
+                toastr.error("服务开始时间不能为空");
+                return false;
+            }
+            else if(stepNumber == 2 && !$("#service_end_datetimepicker").datetimepicker('getValue')){
+                toastr.error("服务结束时间不能为空");
+                return false;
+            }
+            else{
+                return true;
+            }
+
+            if (stepNumber == 3 ){
+                var sales = $(".select-sales").select2("data")[0]["id"];
+                var customers = $(".select-customers").select2("data")[0]["id"];
+                var products = $(".select-products").select2("data")[0]["id"];
+                var areas = $(".select-areas").select2("data")[0]["id"];
+                var engineers = $(".select-engineers").select2("data")[0]["id"];
+                var service_start = formatDateTime($("#service_start_datetimepicker").datetimepicker('getValue'));
+                var service_end = formatDateTime($("#service_end_datetimepicker").datetimepicker('getValue'));
+                var pro_name = $("input[name='pro_name']").val();
+                var ticket_temp = $("select[class='class4']").val();
+
+                $.post(API_URI["tickets"], {
+                    "pro_name": pro_name,
+                    "sale": sales,
+                    "customer": customers,
+                    "product": products,
+                    "area": areas,
+                    "ticket_temp": ticket_temp,
+                    "engineer": engineers,
+                    "service_start": service_start,
+                    "service_end": service_end
+                }).done(function (res) {
+                    toastr.success('工单创建已完成，即将跳转工单页');
+                    setTimeout('window.location.href = "/"',2000);
+                })
+            }
+      });
         $.getJSON(API_URI["customers"]).done(function (res) {
             var data = {
                 list: res["objects"]
@@ -227,50 +287,11 @@
                 loading: "加载中 ..."
             },
             onStepChanging: function (event, currentIndex, newIndex) {
-                if (currentIndex == 0 && !$("input[name='pro_name']").val()){
-                    toastr.error("项目名称不能为空");
-                    return false;
-                }else if (currentIndex == 1 && !$("select[class='class4']").val()){
-                    toastr.error("分类选择不能为空");
-                    return false;
-                }
-                else{
-                    return true;
-                }
+
             },
             onFinished: function (event, currentIndex) {
-                if(currentIndex == 2 && !$("#service_start_datetimepicker").datetimepicker('getValue')){
-                    toastr.error("服务开始时间不能为空");
-                    return false;
-                }
-                if(currentIndex == 2 && !$("#service_end_datetimepicker").datetimepicker('getValue')){
-                    toastr.error("服务结束时间不能为空");
-                    return false;
-                }
-                var sales = $(".select-sales").select2("data")[0]["id"];
-                var customers = $(".select-customers").select2("data")[0]["id"];
-                var products = $(".select-products").select2("data")[0]["id"];
-                var areas = $(".select-areas").select2("data")[0]["id"];
-                var engineers = $(".select-engineers").select2("data")[0]["id"];
-                var service_start = formatDateTime($("#service_start_datetimepicker").datetimepicker('getValue'));
-                var service_end = formatDateTime($("#service_end_datetimepicker").datetimepicker('getValue'));
-                var pro_name = $("input[name='pro_name']").val();
-                var ticket_temp = $("select[class='class4']").val();
 
-                $.post(API_URI["tickets"], {
-                    "pro_name": pro_name,
-                    "sale": sales,
-                    "customer": customers,
-                    "product": products,
-                    "area": areas,
-                    "ticket_temp": ticket_temp,
-                    "engineer": engineers,
-                    "service_start": service_start,
-                    "service_end": service_end
-                }).done(function (res) {
-                    toastr.success('工单创建已完成，即将跳转工单页');
-                    setTimeout('window.location.href = "/"',2000);
-                })
+
             }
         });
 
