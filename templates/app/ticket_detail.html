@@ -1,18 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-      <nav aria-label="You are here:" role="navigation">
-        <ul class="breadcrumbs">
+
+        <ol class="breadcrumb">
             <li><a href="/">首页</a></li>
             <li><a href="/">工单详情页</a></li>
             <li><a href="">{{ ticket_id }}</a></li>
-        </ul>
-      </nav>
+    </ol>
       <div class="grid">
         <div class="cell">
             <div id="ticket_detail_content"></div>
         </div>
         <div class="cell">
-            <a class="button success" href="/">返回</a>
+            <a class="btn btn-info" href="/">返回</a>
         </div>
       </div>
 {% endblock %}
@@ -20,7 +19,7 @@
 {% endblock %}
 {% block js %}
     <script id="ticket_detail" type="text/html">
-        <table class="display-table hover">
+        <table class="table table-bordered table-hover table-striped">
             <tbody>
                 <% for (var key in list) { %>
                 <tr>

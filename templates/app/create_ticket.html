@@ -3,146 +3,163 @@
   <link rel="stylesheet" href="/static/bower_components/jquery.steps/demo/css/jquery.steps.css">
   <link rel="stylesheet" href="/static/bower_components/datetimepicker/build/jquery.datetimepicker.min.css">
   <link rel="stylesheet" href="/static/bower_components/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="/static/bower_components/smartwizard/dist/css/smart_wizard.min.css">
+  <link rel="stylesheet" href="/static/bower_components/smartwizard/dist/css/smart_wizard_theme_dots.min.css">
 {% endblock %}
 {% block content %}
-    <nav aria-label="You are here:" role="navigation">
-      <ul class="breadcrumbs">
+    <ol class="breadcrumb">
         <li><a href="/">首页</a></li>
         <li><a href="/createTicket.html">新增工单</a></li>
-      </ul>
-    </nav>
-    <form action="" id="create_ticket_form">
-       <div id="wizard">
-            <h3>第一步</h3>
-            <section>
-              <div class="row">
-                <div class="medium-6 columns">
-                  <label><strong>项目名称</strong>
-                    <input type="text" placeholder="项目名称" name="pro_name" class="required">
-                  </label>
+    </ol>
+    <form action="" id="create_ticket_form" class="form-horizontal">
+        <div id="smartwizard">
+            <ul>
+                <li><a href="#step-1">第一步<br /><small>填写基本信息</small></a></li>
+                <li><a href="#step-2">第二步<br /><small>填写基本信息</small></a></li>
+                <li><a href="#step-3">第三步<br /><small>完成提交</small></a></li>
+            </ul>
+            <div>
+                <div id="step-1" class="">
+                   <div class="form-group">
+                      <label class="col-sm-2 control-label"><strong>项目名称</strong></label>
+                        <div class="col-sm-10">
+                        <input type="text" placeholder="项目名称" name="pro_name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          <div id="select-sales-content"></div>
+                      </div>
+                    <div class="form-group">
+                            <div id="select-customers-content"></div>
+                      </div>
+                    <div class="form-group">
+                            <div id="select-products-content"></div>
+                       </div>
+                    <div class="form-group">
+                        <div id="select-areas-content"></div>
+                       </div>
                 </div>
-                  <div class="medium-6 columns">
-                      <div id="select-sales-content"></div>
-                  </div>
-                    <div class="medium-6 columns">
-                        <div id="select-customers-content"></div>
-                  </div>
-                    <div class="medium-6 columns">
-                        <div id="select-products-content"></div>
-                   </div>
-                <div class="medium-6 columns">
-                    <div id="select-areas-content"></div>
-                   </div>
-              </div>
-            </section>
-            <h3>第二步</h3>
-            <section>
-                <div class="row">
+                <div id="step-2" class="">
                     <div class="" id="select_class">
                         <label for=""><strong>选择分类I</strong>
-                            <select name="" id="" class="class1">
+                            <select name="" id="" class="class1 form-control">
                                 <option value=""></option>
                             </select>
                         </label>
                         <label for=""><strong>选择分类II</strong>
-                            <select name="" id="" class="class2">
+                            <select name="" id="" class="class2 form-control">
                                 <option value=""></option>
                             </select>
                         </label>
                         <label for=""><strong>选择分类III</strong>
-                            <select name="" id="" class="class3">
+                            <select name="" id="" class="class3 form-control">
                                 <option value=""></option>
                             </select>
                         </label>
                         <label for=""><strong>选择分类IV</strong>
-                            <select name="" id="" class="class4">
+                            <select name="" id="" class="class4 form-control">
                                 <option value=""></option>
                             </select>
                         </label>
                     </div>
                 </div>
-            </section>
-            <h3>第三步</h3>
-            <section>
-                <div class="row">
-                    <div class="medium-6 columns">
+                <div id="step-3" class="">
+                    <div class="form-group">
                         <div id="select-engineers-content"></div>
                     </div>
-                    <div class="medium-6 columns">
-                      <label><strong>服务开始时间</strong>
-                        <input type="text" placeholder="选择日期" id="service_start_datetimepicker">
-                      </label>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"><strong>服务开始时间</strong></label>
+                        <div class="col-sm-10">
+                        <input type="text" placeholder="选择日期" id="service_start_datetimepicker" class="form-control">
+                        </div>
                     </div>
-                    <div class="medium-6 columns">
+                    <div class="form-group">
                         <div id="select-engineers-content"></div>
                     </div>
-                    <div class="medium-6 columns">
-                      <label><strong>服务结束时间</strong>
-                        <input type="text" placeholder="选择日期" id="service_end_datetimepicker">
-                      </label>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"><strong>服务结束时间</strong></label>
+                        <div class="col-sm-10">
+                        <input type="text" placeholder="选择日期" id="service_end_datetimepicker" class="form-control">
+                      </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     </form>
+
 {% endblock %}
 {% block js %}
     <script src="/static/bower_components/jquery.steps/build/jquery.steps.min.js"></script>
     <script src="/static/bower_components/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
     <script src="/static/bower_components/select2/dist/js/select2.min.js"></script>
     <script src="/static/bower_components/jquery.cxselect/jquery.cxselect.min.js"></script>
+    <script src="/static/bower_components/smartwizard/dist/js/jquery.smartWizard.min.js"></script>
     <script id="select-customers" type="text/html">
-      <label for=""><p><strong>选择客户</strong></p>
-        <select name="" id="" class="select-customers">
-            <% for (var i = 0; i < list.length; i ++) { %>
-                <option value="<%= list[i].id %>"><%= list[i].name %></option>
-            <% } %>
-            data: <%=$data%>
-        </select>
-      </label>
+      <label class="col-sm-2 control-label"><strong>选择客户</strong></label>
+          <div class="col-sm-10">
+                      <select name="" id="" class="select-customers">
+                    <% for (var i = 0; i < list.length; i ++) { %>
+                        <option value="<%= list[i].id %>"><%= list[i].name %></option>
+                    <% } %>
+                    data: <%=$data%>
+                </select>
+          </div>
+
     </script>
     <script id="select-sales" type="text/html">
-    <label for=""><p><strong>选择销售</strong></p>
-        <select name="" id="" class="select-sales">
+    <label class="col-sm-2 control-label"><strong>选择销售</strong></label>
+    <div class="col-sm-10">
+        <select name="" id="" class="select-sales form-control">
             <% for (var i = 0; i < list.length; i ++) { %>
                 <option value="<%= list[i].id %>"><%= list[i].name %></option>
             <% } %>
             data: <%=$data%>
         </select>
-              </label>
+        </div>
     </script>
     <script id="select-products" type="text/html">
-        <label for=""><p><strong>选择主导产品</strong></p>
-        <select name="" id="" class="select-products">
-            <% for (var i = 0; i < list.length; i ++) { %>
-                <option value="<%= list[i].id %>"><%= list[i].name %></option>
-            <% } %>
-            data: <%=$data%>
-        </select>
-              </label>
-    </script>
-    <script id="select-areas" type="text/html">
-            <label for=""><p><strong>选择服务区域</strong></p>
-            <select name="" id="" class="select-areas">
+        <label class="col-sm-2 control-label"><strong>选择主导产品</strong></label>
+        <div class="col-sm-10">
+            <select name="" id="" class="select-products">
                 <% for (var i = 0; i < list.length; i ++) { %>
                     <option value="<%= list[i].id %>"><%= list[i].name %></option>
                 <% } %>
                 data: <%=$data%>
             </select>
-          </label>
+         </div>
+    </script>
+    <script id="select-areas" type="text/html">
+            <label class="col-sm-2 control-label"><strong>选择服务区域</strong></label>
+            <div class="col-sm-10">
+                <select name="" id="" class="select-areas">
+                    <% for (var i = 0; i < list.length; i ++) { %>
+                        <option value="<%= list[i].id %>"><%= list[i].name %></option>
+                    <% } %>
+                    data: <%=$data%>
+                </select>
+              </div>
     </script>
     <script id="select-engineers" type="text/html">
-        <label for=""><p><strong>选择工程师</strong></p>
+        <label class="col-sm-2 control-label"><strong>选择工程师</strong></label>
+        <div class="col-sm-10">
             <select name="" id="" class="select-engineers">
                 <% for (var i = 0; i < list.length; i ++) { %>
                     <option value="<%= list[i].id %>"><%= list[i].name %></option>
                 <% } %>
                 data: <%=$data%>
             </select>
-        </label>
+        </div>
     </script>
     <script>
         $(function () {
+             $('#smartwizard').smartWizard({
+                             theme: 'dots',
+                             lang: {  // Language variables
+                next: '下一步',
+                previous: '上一步'
+            },
+
+             });
         $.getJSON(API_URI["customers"]).done(function (res) {
             var data = {
                 list: res["objects"]
